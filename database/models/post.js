@@ -35,6 +35,6 @@ const postSchema = new Schema({
   },
 });
 
-const User = model("Post", postSchema);
+const Post = model("Post", postSchema);
 
-module.exports = User;
+module.exports = Post;
