@@ -16,7 +16,7 @@ const postSchema = new Schema({
   },
   categories: {
     type: [Types.ObjectId],
-    ref: "Category",
+    ref: "Categorie",
     required: true,
   },
   creationDate: {
