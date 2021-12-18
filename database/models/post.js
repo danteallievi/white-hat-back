@@ -28,7 +28,7 @@ const postSchema = new Schema({
     ref: "User",
     required: true,
   },
-  favorites: {
+  favourites: {
     type: [Types.ObjectId],
     ref: "User",
     default: [],
