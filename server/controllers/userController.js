@@ -20,4 +20,19 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports = createUser;
+const getUser = async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      const error = new Error("User not found");
+      error.code = 404;
+      return next(error);
+    }
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createUser, getUser };
