@@ -45,4 +45,24 @@ const getPostById = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, getPostById };
+const createPost = async (req, res, next) => {
+  const { title, description, categories, creator, videoUrl } = req.body;
+  console.log(req.body);
+
+  try {
+    const newPost = await Post.create({
+      title,
+      description,
+      categories,
+      creator,
+      videoUrl,
+    });
+
+    res.status(201).json(newPost);
+  } catch {
+    const error = new Error("Error creating the post.");
+    next(error);
+  }
+};
+
+module.exports = { getPosts, getPostById, createPost };
