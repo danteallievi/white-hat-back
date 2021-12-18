@@ -28,7 +28,7 @@ const getPosts = async (req, res, next) => {
 };
 
 const getPostById = async (req, res, next) => {
-  const { postId } = req.params;
+  const { id: postId } = req.params;
   try {
     const post = await Post.findById(postId);
 
