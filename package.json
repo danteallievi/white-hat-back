@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index -q"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +18,12 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "chalk": "^5.0.0",
+    "cors": "^2.8.5",
     "debug": "^4.3.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "express-validation": "^3.0.8",
+    "mongoose": "^6.1.2",
     "morgan": "^1.10.0"
   }
 }
