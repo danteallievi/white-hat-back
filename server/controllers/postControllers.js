@@ -83,4 +83,34 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, getPostById, createPost, deletePost };
+const updatePost = async (req, res, next) => {
+  const { id: postId } = req.params;
+  const { title, description, categories, creator, videoUrl } = req.body;
+
+  try {
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      {
+        title,
+        description,
+        categories,
+        creator,
+        videoUrl,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!post) {
+      const error = new Error("Post to update not found.");
+      error.status = 404;
+      return next(error);
+    }
+
+    res.status(200).json(post);
+  } catch {
+    const error = new Error("Error updating the post.");
+    next(error);
+  }
+};
+
+module.exports = { getPosts, getPostById, createPost, deletePost, updatePost };
