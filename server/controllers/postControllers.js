@@ -2,7 +2,9 @@ const Post = require("../../database/models/post");
 
 const getPosts = async (req, res, next) => {
   try {
-    const allPosts = await Post.find(req.query);
+    const allPosts = await Post.find(req.query)
+      .populate({ path: "categories" })
+      .populate({ path: "creator" });
     // .sort({ _id: -1 })
     // .limit(LIMIT)
     // .skip(startIndex);
@@ -30,8 +32,9 @@ const getPosts = async (req, res, next) => {
 const getPostById = async (req, res, next) => {
   const { id: postId } = req.params;
   try {
-    const post = await Post.findById(postId);
-
+    const post = await Post.findById(postId)
+      .populate({ path: "categories" })
+      .populate({ path: "creator" });
     if (!post) {
       const error = new Error("Post not found");
       error.status = 404;
