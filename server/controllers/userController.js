@@ -22,7 +22,11 @@ const createUser = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   const { userId } = req.params;
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId)
+      .populate({
+        path: "favourites",
+      })
+      .populate({ path: "created" });
     if (!user) {
       const error = new Error("User not found");
       error.code = 404;
