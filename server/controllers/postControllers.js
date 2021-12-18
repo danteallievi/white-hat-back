@@ -65,4 +65,22 @@ const createPost = async (req, res, next) => {
   }
 };
 
-module.exports = { getPosts, getPostById, createPost };
+const deletePost = async (req, res, next) => {
+  const { id: postId } = req.params;
+  try {
+    const post = await Post.findByIdAndDelete(postId);
+
+    if (!post) {
+      const error = new Error("Post to delete not found.");
+      error.status = 404;
+      return next(error);
+    }
+
+    res.status(200).json(post);
+  } catch {
+    const error = new Error("Error deleting the post.");
+    next(error);
+  }
+};
+
+module.exports = { getPosts, getPostById, createPost, deletePost };
