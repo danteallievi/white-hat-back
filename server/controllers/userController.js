@@ -5,9 +5,7 @@ const createUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
-      const error = new Error("Wrong credentials");
-      error.code = 401;
-      next(error);
+      res.json(user);
     } else {
       const userToCreate = await User.create({
         email,
