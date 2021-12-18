@@ -2,14 +2,10 @@ const Post = require("../../database/models/post");
 
 const getPosts = async (req, res, next) => {
   try {
-    const LIMIT = 9;
-    const startIndex = (Number(page) - 1) * LIMIT;
-    const total = await Post.countDocuments({});
-
-    const allPosts = await Post.find(req.query)
-      .sort({ creationDate: -1 })
-      .limit(LIMIT)
-      .skip(startIndex);
+    const allPosts = await Post.find(req.query);
+    // .sort({ _id: -1 })
+    // .limit(LIMIT)
+    // .skip(startIndex);
 
     if (!allPosts) {
       const error = new Error("No posts found");
@@ -19,11 +15,11 @@ const getPosts = async (req, res, next) => {
 
     res.status(200).json({
       data: allPosts,
-      pagination: {
-        page: Number(page),
-        limitPage: LIMIT,
-        numberOfPages: Math.ceil(total / LIMIT),
-      },
+      // pagination: {
+      //   page: pageNumber,
+      //   total: totalPosts,
+      //   size: pageNumbers,
+      // },
     });
   } catch {
     const error = new Error("Error loading the posts.");
