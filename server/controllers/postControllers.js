@@ -1,4 +1,5 @@
 const Post = require("../../database/models/post");
+const User = require("../../database/models/user");
 
 const getPosts = async (req, res, next) => {
   try {
@@ -47,7 +48,6 @@ const getPostById = async (req, res, next) => {
 
 const createPost = async (req, res, next) => {
   const { title, description, categories, creator, videoUrl } = req.body;
-  console.log(req.body);
 
   try {
     const newPost = await Post.create({
@@ -57,6 +57,11 @@ const createPost = async (req, res, next) => {
       creator,
       videoUrl,
     });
+
+    await User.findOneAndUpdate(
+      { _id: creator },
+      { $push: { created: newPost.id } }
+    );
 
     res.status(201).json(newPost);
   } catch {
