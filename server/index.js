@@ -34,6 +34,8 @@ const initializeServer = (port) =>
     });
   });
 
+app.use("/post", postRoutes);
+
 app.use(notFoundErrorHandler);
 app.use(generalErrorHandler);
 
