@@ -39,7 +39,7 @@ const initializeServer = (port) =>
 
 app.use("/post", postRoutes);
 app.use("/user", usersRoutes);
-app.use("/categories", categorieRoutes);
+app.use("/category", categorieRoutes);
 
 app.use(notFoundErrorHandler);
 app.use(generalErrorHandler);
