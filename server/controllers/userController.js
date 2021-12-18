@@ -40,7 +40,7 @@ const favoriteUserVideo = async (req, res, next) => {
   try {
     const user = await User.findById(userId);
     const post = await Post.findById(postId);
-    if (!user && !post) {
+    if (!user || !post) {
       const error = new Error("User or post not found");
       error.code = 404;
       return next(error);
