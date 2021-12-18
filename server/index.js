@@ -6,6 +6,7 @@ const {
   notFoundErrorHandler,
   generalErrorHandler,
 } = require("./middlewares/error");
+const postRoutes = require("./routes/postsRoutes");
 
 const app = express();
 
